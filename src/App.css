@@ -1,0 +1,28 @@
+.App {
+  padding-bottom: 25px;
+  padding-top: 25px;
+}
+
+.default-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+
+.App-footer {
+  position: fixed;
+  bottom: 0px;
+  right: 0;
+  padding: 20px;
+}
+
+@media (min-width: 200px) and (max-width: 1000px) {
+  .App-footer {
+    padding: 0;
+    padding-top: 25px;
+    position: relative;
+    text-align: center;
+  }
+}

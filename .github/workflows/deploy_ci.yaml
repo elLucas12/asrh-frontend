@@ -1,0 +1,41 @@
+name: Integração e deploy para produção
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - name: Checar código do repositório
+        uses: actions/checkout@v4
+
+      # Configuração do Node versão 18
+      - name: Configurar Node.JS
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          registry-url: 'https://npm.pkg.github.com'
+
+      # Instalação de dependências do NPM
+      - name: Instalar dependências
+        run: npm install
+
+      # # Rodar testes de lógica
+      # - name: Rodar testes Jest
+      #   run: npm test
+      
+      # Publica o pacote de versão como uma release no github
+      - name: Publicar pacote de versão
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
